@@ -1,8 +1,8 @@
 # Pranto Chandro — Developer Portfolio
 
 A dark, responsive portfolio built with Next.js (App Router), React, Tailwind CSS v4, and
-`lucide-react`. The home page covers About, Skills, Education, Experience, Projects, and Contact,
-and every project links to its own case study at `/projects/[slug]`.
+`lucide-react`. The home page covers About, Skills, Education, Projects, and Contact, and each
+of the two featured projects links to its own case study at `/projects/[slug]`.
 
 ## Run it locally
 
@@ -32,29 +32,27 @@ src/
     projects/[slug]/page.js   project case studies
   components/            Navbar, Hero, About, Skills, Education, Experience,
                          Projects, ProjectCard, ProjectVisual, Contact, Footer,
-                         SectionHeading, ResumeButton, SocialLinks,
-                         BrandIcons, ProjectStatus
+                         SectionHeading, ResumeButton, SocialLinks, Logo,
+                         TechIcon, BrandIcons, ProjectStatus
   data/
     portfolio.js         your personal content (edit this first)
     projects.js          project records + lookup helpers
   lib/assets.js          server-only "does this file exist?" helper
 ```
 
-## Add the missing files
+## Assets
 
-These are intentionally absent so the site never shows a broken image or a dead download.
-Drop them in and rebuild — no code changes needed.
+The site has all the files it needs. Replace an asset in place and rebuild; no code
+change is required unless you change a filename.
 
 | File | Where it appears |
 | --- | --- |
-| `public/pranto.png` | Hero portrait (already added). Keep the filename or update `profileImage` in `src/data/portfolio.js`. |
-| `public/resume.pdf` | "Download CV" / "Download Resume" buttons. Without it, the buttons show a "not added yet" notice. |
-| `public/images/projects/bazardor.png` | BazarDor card + case study |
-| `public/images/projects/fitlog.png` | FitLog card + case study |
-| `public/images/projects/dev-stack.png` | Dev Stack card + case study |
-| `public/images/projects/ticket-management-system.png` | Ticket Management System card + case study |
+| `public/pranto.png` | Hero portrait. Keep the filename or update `profileImage` in `src/data/portfolio.js`. |
+| `public/resume.pdf` | "Download CV" / "Download Resume" buttons. A copy of `public/Pranto_Chandro_Paul_Resume.pdf`; update `siteConfig.resumePath` if you rename it. |
+| `public/fit-log.jpeg` | FitLog card + case study |
+| `public/bazar-dor.jpeg` | Bazar Dor card + case study |
 
-Screenshots around 1600×1000 look best; they are rendered with `next/image` at a 16:10 crop.
+Project thumbnails are 16:9 and render through `next/image` with a 16:9 frame.
 Image paths live in `src/data/projects.js` if you use different filenames.
 
 ## Personalize the content
@@ -71,15 +69,16 @@ Everything editable is in `src/data/portfolio.js`:
 - **Experience** — `experience` is an empty array, so the section honestly says you are looking
   for your first role and highlights three projects. Add real roles to `experience` and the
   timeline renders automatically (shape is documented in the file).
-- **Skills** — grouped by category with `Comfortable` / `Familiar` / `Learning` labels instead of
-  invented percentages. Edit names and levels freely.
+- **Skills** — grouped into Frontend, Backend, Database, and Tools. Icons and official brand
+  colors come from `src/components/TechIcon.jsx`; edit the skill names in `skillGroups`.
 - **Site URL** — set `siteUrl` (for example `https://your-domain.com`) after deploying so
   Open Graph metadata resolves absolute URLs.
 
-Projects live in `src/data/projects.js`. Each record needs `slug`, `title`, `tagline`,
-`description`, `status`, `accent`, `monogram`, `image`, `imageAlt`, `tech`, `liveUrl`,
-`githubUrl`, `overview`, `features`, `challenges`, and `improvements`. Use `null` for a live URL
-that does not exist — the UI then shows "Not published yet" instead of a dead link. Adding a
+Projects live in `src/data/projects.js`. The site features FitLog and Bazar Dor. Each record
+needs `slug`, `number`, `title`, `tagline`, `description`, `purpose`, `status`, `category`,
+`accent`, `monogram`, `image`, `imageAlt`, `tech`, `liveUrl`, `githubUrl`, `overview`,
+`features`, `challenges`, and `improvements`. `banglaTitle` is optional. Use `null` for a live
+URL that does not exist — the UI then shows "Not published yet" instead of a dead link. Adding a
 record automatically creates its page, card, and related-project links.
 
 ## Notes
